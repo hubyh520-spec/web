@@ -1,0 +1,259 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>山田杏奈</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { height: 100%; overflow: hidden; font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-weight: 300; line-height: 1.6; -webkit-font-smoothing: antialiased; color: #222; background-size: cover; background-position: center; background-repeat: no-repeat; background-attachment: fixed; justify-content: center; }
+@media (max-width: 600px) { body { background-image: url('https://api.yppp.net/pe.php'); } }
+@media (min-width: 599px) { body { background-image: url('https://api.yppp.net/pc.php'); } }
+.遮罩 { background-image: url('img/overlay.svg'); background-size: cover; background-position: center; background-repeat: no-repeat; background-attachment: fixed; justify-content: center; }
+.页面控制器 { height: 100vh; height: 100dvh; overflow-y: scroll; scroll-behavior: smooth; scroll-snap-type: y mandatory; }
+.区块 { position: relative; width: 100%; height: calc(100vh - 24px); height: calc(100dvh - 24px); scroll-snap-align: start; scroll-snap-stop: always; display: flex; align-items: center; justify-content: center; padding: 20px; overflow: hidden; flex-shrink: 0; border-radius: 48px; }
+.container { max-width: 1100px; width: 100%; position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+.blockContent { display: flex; flex-direction: column; align-items: center; text-align: center; width: 100%; }
+
+
+.头像Wrapper { position: relative; width: 80px; height: 80px; margin-bottom: 15px; border-radius: 50%; box-shadow: 0px 2px 20px 15px rgb(255 255 255 / 25%); }
+.头像 { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; display: block; border: none; box-shadow: inset 0 2px 4px rgba(255,255,255,0.2), inset 0 -2px 4px rgba(0,0,0,0.05); }
+.heroTitle { font-size: 25px; font-weight: 350; letter-spacing: 0.08em; color: #ffffff; margin-bottom: 0.4rem; }
+.heroSub { font-size: 18px; font-weight: 280; color: #e9e9e9; letter-spacing: 0.04em; max-width: 480px; }
+.sectionTitle { font-size: 25px; font-weight: 350; letter-spacing: 0.08em; color: #ffffff; margin-bottom: 1rem; text-align: center; width: 100%; position: relative; }
+.sectionTitle::after { content: ""; display: block; width: 60px; height: 2px; margin: 0.6rem auto 0; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent); }
+.弹幕输入框Wrapper { margin: 0.6rem 0 0.2rem 0; width: 100%; max-width: 420px; display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 0.5rem; background: rgba(255, 255, 255, 0.04); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); padding: 0.4rem 0.4rem 0.4rem 1rem; border-radius: 60px; border: 1px solid rgba(255, 255, 255, 0.08); box-shadow: 0 6px 24px rgba(0,0,0,0.02); transition: all 0.2s ease; }
+.弹幕输入框Wrapper:focus-within { border-color: rgba(255, 255, 255, 0.25); background: rgba(255, 255, 255, 0.08); }
+.弹幕输入框 { flex: 1; min-width: 140px; background: transparent; border: none; padding: 0.4rem 0; font-size: 0.8rem; font-weight: 300; color: #f5f0ea; outline: none; letter-spacing: 0.03em; }
+.弹幕输入框::placeholder { color: rgba(255, 255, 255, 0.35); font-weight: 200; letter-spacing: 0.04em; }
+.发送弹幕按钮 { background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 40px; padding: 0.3rem 1.2rem; font-size: 0.7rem; font-weight: 330; color: #f5f0ea; cursor: pointer; transition: all 0.2s ease; letter-spacing: 0.06em; backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); white-space: nowrap; line-height: 1.4; }
+.发送弹幕按钮:hover { background: rgba(255, 255, 255, 0.16); border-color: rgba(255, 255, 255, 0.25); transform: scale(0.97); }
+.发送弹幕按钮:active { transform: scale(0.94); }
+
+
+.projectList { width: 100%; max-width: 720px; margin: 0 auto; display: flex; flex-direction: column; gap: 0.8rem; }
+.projectItem { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.4rem 1rem; background: rgba(255, 255, 255, 0.04); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); padding: 0.9rem 1.6rem; border-radius: 24px; border: 1px solid rgba(255, 255, 255, 0.06); box-shadow: 0 6px 20px rgba(0,0,0,0.02); transition: all 0.25s ease; }
+.projectName { font-size: 17px; font-weight: 400; letter-spacing: 0.04em; color: #ffffff; display: flex; align-items: center; gap: 0.4rem; }
+.projectMeta { display: flex; align-items: center; gap: 0.6rem 1.2rem; flex-wrap: wrap; font-size: 0.75rem; color: #cfc9c2; }
+.metaItem { display: flex; align-items: center; gap: 0.2rem; }
+.metaItem .label { font-size: 0.5rem; text-transform: uppercase; letter-spacing: 0.08em; color: rgba(255,255,255,0.3); font-weight: 350; }
+.metaItem .value { font-weight: 400; color: #e9e9e9; letter-spacing: 0.02em; }
+.globalActions { display: flex; align-items: center; justify-content: center; gap: 1rem; margin-top: 1.4rem; flex-wrap: wrap; }
+.globalBtn { display: inline-flex; align-items: center; gap: 0.4rem 0.6rem; padding: 8px 15px; border-radius: 40px; font-size: 0.8rem; font-weight: 350; letter-spacing: 0.06em; color: #f5f0ea; background: rgba(20, 20, 20, 0.4); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); border: 1px solid rgba(255, 255, 255, 0.08); box-shadow: 0 4px 20px rgba(0,0,0,0.03); transition: all 0.25s ease; text-decoration: none; cursor: pointer; }
+.globalBtn i { font-size: 0.7rem; opacity: 0.7; }
+.globalBtn:hover { background: rgba(40, 40, 40, 0.6); border-color: rgba(255, 255, 255, 0.15); transform: scale(0.97); }
+.globalBtn-primary { background: rgba(255, 255, 255, 0.08); color: #ffffff; border-color: rgba(255, 255, 255, 0.1); }
+.globalBtn-primary:hover { background: rgba(255, 255, 255, 0.16); border-color: rgba(255, 255, 255, 0.2); }
+.globalBtn-secondary { background: rgba(235, 228, 220, 0.08); color: #f0ece7; border-color: rgba(255, 255, 255, 0.04); }
+.globalBtn-secondary:hover { background: rgba(235, 228, 220, 0.16); border-color: rgba(255, 255, 255, 0.1); }
+
+
+.serviceRow { display: flex; flex-wrap: wrap; justify-content: center; gap: 1.6rem; font-size: 0.68rem; color: #ffffff; letter-spacing: 0.04em; border-top: 1px solid rgba(80, 68, 56, 0.06); width: 100%; }
+.serviceItem { backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); text-align: center; display: flex; flex-direction: column; align-items: center; padding: 1.2rem 1.8rem; min-width: 180px; border-radius: 24px; box-shadow: inset 2px 2px 8px rgba(235, 228, 220, 0.4), inset -4px -4px 12px rgba(140, 128, 116, 0.08), 0 12px 32px rgba(60, 48, 40, 0.04); border: 1px solid rgba(235, 228, 220, 0.15); }
+.serviceLabel { font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.12em; color: #ffffff; }
+.serviceValue { font-size: 0.95rem; font-weight: 330; color: #e9e9e9; margin-top: 0.05rem; }
+.serviceValue a { color: #e9e9e9; text-decoration: none; border-bottom: 1px solid rgba(80, 68, 56, 0.12); padding-bottom: 1px; }
+
+.底部提示 { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); z-index: 100; color: #ffffff; font-size: 0.6rem;letter-spacing: 0.12em; text-transform: uppercase; animation: floatDown 2.4s ease-in-out infinite; opacity: 0.6; display: flex; flex-direction: column; align-items: center; gap: 0.2rem; pointer-events: none; backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); padding: 10px 15px; border-radius: 40px; box-shadow: inset 4px 4px 10px #d1d8e3, inset -4px -4px 10px #d1d8e3; white-space: nowrap; }
+@keyframes floatDown { 0%, 100% { transform: translateX(-50%) translateY(0); opacity: 0.5; } 50% { transform: translateX(-50%) translateY(8px); opacity: 0.8; } }
+
+
+
+
+@media (max-width: 768px) { .头像Wrapper { width: 64px; height: 64px; } .globalActions { gap: 0.6rem; } .serviceItem { min-width: 140px; padding: 1rem 1.2rem; } .弹幕输入框Wrapper { max-width: 320px; padding-left: 0.8rem; } }
+@media (max-width: 480px) { .sectionTitle { font-size: 1.5rem; } .serviceItem { min-width: 130px; padding: 0.8rem 1rem; } .弹幕输入框Wrapper { max-width: 260px; padding-left: 0.6rem; gap: 0.3rem; } .弹幕输入框 { font-size: 0.7rem; min-width: 80px; } .发送弹幕按钮 { font-size: 0.6rem; padding: 0.2rem 0.8rem; } }
+.弹幕区块 { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 999; overflow: hidden; }
+.danmaku-item { position: absolute; white-space: nowrap; color: #fff; font-size: 20px; font-weight: bold; text-shadow: 0 0 10px rgba(0,0,0,0.8), 0 0 20px rgba(0,0,0,0.5); animation: danmakuMove linear forwards; pointer-events: none; opacity: 0.9; }
+@keyframes danmakuMove { 0% { transform: translateX(100vw); opacity: 1; } 100% { transform: translateX(-100%); opacity: 0; } }
+  </style>
+</head>
+<body><a href="https://xn--whun3gfrdt0x.xyz/cdn-cgi/content?id=ag89Khlt1iwysHsCYRb5C5.EaLt35.JcchKyCLowTWU-1789309603.350405-1.2.1.1-kyjwVGmbDVe7a5p4NARBJp..1H0YPA6KYQMhlHW1vSQp1CnQ9a7d7LqhzlRbkGG_" aria-hidden="true" rel="nofollow noopener" style="display: none !important; visibility: hidden !important"></a>
+<div class="遮罩">
+  <div class="页面控制器" id="页面控制器">
+      
+    <section class="区块" data-index="0" data-label="主页">
+      <div class="container">
+        <div class="头像Wrapper">
+          <img class="头像" src="img/山田杏奈.gif" alt="山田杏奈">
+        </div>
+        <div class="heroTitle">山田杏奈</div>
+        <div class="heroSub">很高兴遇见你，梦想照亮未来，故梦伴你同行。</div>
+        <div class="弹幕输入框Wrapper">
+          <input type="text" class="弹幕输入框" id="弹幕输入框" placeholder="山田杏奈想听见你的声音..." maxlength="30" autocomplete="off">
+          <button class="发送弹幕按钮" id="发送按钮" onclick="发送弹幕()">确定</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="区块" data-index="1" data-label="项目">
+      <div class="container blockContent">
+        <div class="sectionTitle">项目</div>
+        
+        <div class="projectList">
+          <div class="projectItem">
+            <div class="projectName">山田杏奈</div>
+            <div class="projectMeta">
+              <span class="metaItem"><span class="label">在线</span><span class="value" id="online1">-</span></span>
+              <span class="metaItem"><span class="label">最新</span><span class="value" id="version1">-</span></span>
+            </div>
+          </div>
+
+          <div class="projectItem">
+            <div class="projectName">神盾局</div>
+            <div class="projectMeta">
+              <span class="metaItem"><span class="label">在线</span><span class="value" id="online2">-</span></span>
+              <span class="metaItem"><span class="label">最新</span><span class="value" id="version2">-</span></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="globalActions">
+          <a href="https://share.feijipan.com/s/re1Ru6XF" target="_blank" class="globalBtn globalBtn-primary">
+            下载
+          </a>
+          <a href="https://1812828296.share.123pan.cn/123pan/hPGKVv-bdIQ" target="_blank" class="globalBtn globalBtn-primary">
+            下载(备用)
+          </a>
+          <a href="https://山田杏奈.xyz/by/01" target="_blank" class="globalBtn globalBtn-secondary">
+            购卡
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="区块" data-index="2" data-label="售后">
+      <div class="container blockContent">
+        <div class="sectionTitle">售后</div>
+        <div class="serviceRow">
+          <div class="serviceItem">
+            <div class="serviceLabel">TG售后</div>
+            <div class="serviceValue"><a href="tg://join?domain=BYCY0">@Bycy0</a></div>
+          </div>
+          <div class="serviceItem">
+            <div class="serviceLabel">TG机器人(双向)</div>
+            <div class="serviceValue"><a href="tg://join?domain=ZDMODBOT">@Zdmodbot</a></div>
+          </div>
+          <div class="serviceItem">
+            <div class="serviceLabel">官方Q群</div>
+            <div class="serviceValue"><a href="tencent://message/?uin=1067705983&site=qq.com&menu=yes&from=qq">1067705983</a></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+  <div class="底部提示" id="底部提示">
+    <span>滑动探索</span>
+  </div>
+</div>
+
+<div class="弹幕区块"></div>
+
+<script>
+let 当前Token = '9fb1a44fdb73ea70f816ee1f422dd725';
+let 弹幕数据 = {"data":[{"id":325,"danmaku":"鸡巴蛇","create_time":"2026-09-13 22:15:05"},{"id":324,"danmaku":"吃鸡巴","create_time":"2026-09-13 22:14:36"},{"id":323,"danmaku":"sB","create_time":"2026-09-13 17:56:03"},{"id":322,"danmaku":"7878","create_time":"2026-09-13 17:27:10"},{"id":321,"danmaku":"Env-山田杏奈-2D-AW7OIRD0","create_time":"2026-09-13 16:52:15"},{"id":320,"danmaku":"我云验忘密码了","create_time":"2026-09-13 16:11:47"},{"id":319,"danmaku":"能不能出MG3的皮肤","create_time":"2026-09-13 15:03:23"},{"id":318,"danmaku":"1","create_time":"2026-09-13 14:45:14"},{"id":317,"danmaku":"##X3onUdRf5Nmf2aB##","create_time":"2026-09-13 12:06:01"},{"id":316,"danmaku":"vf","create_time":"2026-09-13 12:03:29"},{"id":315,"danmaku":"6666","create_time":"2026-09-13 12:01:18"},{"id":314,"danmaku":"都发给爸爸v哥","create_time":"2026-09-13 09:47:47"},{"id":313,"danmaku":"9178","create_time":"2026-09-13 09:45:34"},{"id":312,"danmaku":"919191","create_time":"2026-09-13 08:08:04"},{"id":311,"danmaku":"7 54 06 01 30","create_time":"2026-09-13 04:48:11"},{"id":310,"danmaku":"YG","create_time":"2026-09-13 03:43:20"},{"id":309,"danmaku":"9177","create_time":"2026-09-13 01:29:52"},{"id":308,"danmaku":"111","create_time":"2026-09-12 23:36:06"},{"id":307,"danmaku":"111","create_time":"2026-09-12 23:31:13"},{"id":306,"danmaku":"78","create_time":"2026-09-12 23:30:33"},{"id":305,"danmaku":"1","create_time":"2026-09-12 23:26:46"},{"id":304,"danmaku":"789787878","create_time":"2026-09-12 22:54:20"},{"id":303,"danmaku":"778","create_time":"2026-09-12 22:43:48"},{"id":302,"danmaku":"78","create_time":"2026-09-12 22:05:29"},{"id":301,"danmaku":"13","create_time":"2026-09-12 21:27:22"},{"id":300,"danmaku":"9178","create_time":"2026-09-12 19:40:53"},{"id":299,"danmaku":"怡怡齐齐","create_time":"2026-09-12 19:24:55"},{"id":298,"danmaku":"j8","create_time":"2026-09-12 18:31:11"},{"id":297,"danmaku":"加油","create_time":"2026-09-12 18:20:02"},{"id":296,"danmaku":"礻个","create_time":"2026-09-12 17:59:07"},{"id":295,"danmaku":"Nb666","create_time":"2026-09-12 17:18:01"},{"id":294,"danmaku":"1","create_time":"2026-09-12 17:18:00"},{"id":293,"danmaku":"666","create_time":"2026-09-12 17:15:05"},{"id":292,"danmaku":"78","create_time":"2026-09-12 17:08:58"},{"id":291,"danmaku":"山田杏奈直装","create_time":"2026-09-12 15:28:47"},{"id":290,"danmaku":"2D-3D4ZOH5T","create_time":"2026-09-12 15:02:47"},{"id":289,"danmaku":"78","create_time":"2026-09-12 14:38:32"},{"id":288,"danmaku":"hh","create_time":"2026-09-12 14:19:23"},{"id":287,"danmaku":"加油","create_time":"2026-09-12 13:24:40"},{"id":286,"danmaku":"YY","create_time":"2026-09-12 12:24:07"},{"id":285,"danmaku":"梦哥我想给你生猴子","create_time":"2026-09-12 11:45:41"},{"id":284,"danmaku":"91","create_time":"2026-09-12 11:37:31"},{"id":283,"danmaku":"91","create_time":"2026-09-12 10:56:00"},{"id":282,"danmaku":"78","create_time":"2026-09-12 10:55:46"},{"id":281,"danmaku":"。山田杏奈之窗","create_time":"2026-09-12 10:44:34"},{"id":280,"danmaku":"91","create_time":"2026-09-12 10:18:00"},{"id":279,"danmaku":"91","create_time":"2026-09-12 10:12:53"},{"id":278,"danmaku":"91","create_time":"2026-09-12 09:55:24"},{"id":277,"danmaku":"SF GG","create_time":"2026-09-12 09:02:01"},{"id":276,"danmaku":"山田杏奈直装","create_time":"2026-09-12 08:47:40"},{"id":275,"danmaku":"91","create_time":"2026-09-12 08:35:31"},{"id":274,"danmaku":"78","create_time":"2026-09-12 07:47:21"},{"id":273,"danmaku":"。","create_time":"2026-09-12 07:37:43"},{"id":272,"danmaku":"，","create_time":"2026-09-12 07:08:39"},{"id":271,"danmaku":"j8","create_time":"2026-09-12 05:42:59"},{"id":270,"danmaku":"9178","create_time":"2026-09-12 02:44:56"},{"id":269,"danmaku":"UU","create_time":"2026-09-12 02:15:10"},{"id":268,"danmaku":"@SDJMOD","create_time":"2026-09-12 02:07:24"},{"id":267,"danmaku":"91","create_time":"2026-09-12 02:02:38"},{"id":266,"danmaku":"18","create_time":"2026-09-12 01:09:30"},{"id":265,"danmaku":"78","create_time":"2026-09-12 01:08:52"},{"id":264,"danmaku":"521","create_time":"2026-09-12 00:17:22"},{"id":263,"danmaku":"。。","create_time":"2026-09-11 23:58:33"},{"id":262,"danmaku":"9178","create_time":"2026-09-11 23:57:48"},{"id":261,"danmaku":"1","create_time":"2026-09-11 23:57:33"},{"id":260,"danmaku":"91","create_time":"2026-09-11 23:29:11"},{"id":259,"danmaku":"91","create_time":"2026-09-11 22:02:57"},{"id":258,"danmaku":"91","create_time":"2026-09-11 21:37:43"},{"id":257,"danmaku":"78","create_time":"2026-09-11 21:28:56"},{"id":256,"danmaku":"山田杏奈NB917813","create_time":"2026-09-11 20:52:23"},{"id":255,"danmaku":"1","create_time":"2026-09-11 20:47:18"},{"id":254,"danmaku":"pubg","create_time":"2026-09-11 20:28:16"},{"id":253,"danmaku":"78","create_time":"2026-09-11 19:59:56"},{"id":252,"danmaku":"牛逼","create_time":"2026-09-11 19:55:33"},{"id":251,"danmaku":"787878","create_time":"2026-09-11 19:15:25"},{"id":250,"danmaku":"CSrwqCU434","create_time":"2026-09-11 19:00:35"},{"id":249,"danmaku":"Pub g牛逼","create_time":"2026-09-11 18:45:18"},{"id":248,"danmaku":"Mj","create_time":"2026-09-11 18:42:45"},{"id":247,"danmaku":"很高兴遇见你","create_time":"2026-09-11 18:38:43"},{"id":246,"danmaku":"？","create_time":"2026-09-11 18:37:27"},{"id":245,"danmaku":"山田杏奈","create_time":"2026-09-11 18:37:13"},{"id":244,"danmaku":"PUBG","create_time":"2026-09-11 18:36:27"},{"id":243,"danmaku":"加油","create_time":"2026-09-11 18:24:52"},{"id":242,"danmaku":"1","create_time":"2026-09-11 17:41:22"},{"id":241,"danmaku":"Env-山田杏奈-2D-AW7OIRD0","create_time":"2026-09-11 17:34:33"},{"id":240,"danmaku":"加油","create_time":"2026-09-11 17:17:41"},{"id":239,"danmaku":"91","create_time":"2026-09-11 17:02:40"},{"id":238,"danmaku":"PUBG","create_time":"2026-09-11 16:33:07"},{"id":237,"danmaku":"778","create_time":"2026-09-11 16:14:09"},{"id":236,"danmaku":"91","create_time":"2026-09-11 12:41:21"},{"id":235,"danmaku":"1","create_time":"2026-09-11 11:57:02"},{"id":234,"danmaku":"海与你","create_time":"2026-09-11 09:42:46"},{"id":233,"danmaku":"78","create_time":"2026-09-11 09:42:15"},{"id":232,"danmaku":"我爱你","create_time":"2026-09-11 07:42:35"},{"id":231,"danmaku":"11","create_time":"2026-09-11 07:15:18"},{"id":230,"danmaku":"山田杏奈","create_time":"2026-09-11 07:11:50"},{"id":229,"danmaku":"山田杏奈","create_time":"2026-09-11 07:06:00"},{"id":228,"danmaku":"91","create_time":"2026-09-11 07:00:43"},{"id":227,"danmaku":"下载","create_time":"2026-09-11 06:25:16"},{"id":226,"danmaku":"1111","create_time":"2026-09-11 01:08:38"}]};
+</script>
+
+<script>
+function alert(message) {
+    const toast = document.createElement('div');
+    toast.style.cssText = `
+        position: fixed;
+        top: 5%;
+        left: 50%;
+        transform: translateX(-50%);
+        background: #fffcfcf2;
+        color: #000;
+        padding: 12px 15px;
+        border-radius: 6px;
+        z-index: 1200; /* 比弹窗更高 */
+        font-size: 14px;
+        font-weight: 500;
+        
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        animation: fadeInOut 2.0s ease;
+    `;
+    
+    toast.textContent = message;
+    document.body.appendChild(toast);
+    
+    if (!document.querySelector('#toastAnimations')) {
+        const style = document.createElement('style');
+        style.id = 'toastAnimations';
+        style.textContent = `
+            @keyframes fadeInOut {
+                0% {
+                    opacity: 0;
+                    transform: translateX(-50%) translateY(-10px);
+                }
+                20% {
+                    opacity: 1;
+                    transform: translateX(-50%) translateY(0);
+                }
+                80% {
+                    opacity: 1;
+                    transform: translateX(-50%) translateY(0);
+                }
+                100% {
+                    opacity: 0;
+                    transform: translateX(-50%) translateY(-10px);
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    }
+    
+    setTimeout(() => {
+        if (toast.parentNode) {
+            toast.parentNode.removeChild(toast);
+        }
+    }, 2000);
+}
+
+
+
+
+//设置版本信息
+function 设置项目信息() {
+    const 祈愿_在线 = document.getElementById('online1');
+    const 祈愿_版本 = document.getElementById('version1');
+    const 神盾局_在线 = document.getElementById('online2');
+    const 神盾局_版本 = document.getElementById('version2');
+
+    fetch('https://api.xn--whun3gfrdt0x.xyz/api/get_info.php', {
+        method: 'GET'
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+        }
+        return response.json();
+    })
+    .then(data => {
+        const 祈愿项目 = data['山田杏奈'];
+        
+        祈愿_版本.textContent = 祈愿项目['最新版本'];
+        祈愿_在线.textContent = 祈愿项目['在线'];
+        
+        
+        const 神盾局项目 = data['神盾局'];
+        神盾局_版本.textContent = 神盾局项目['最新版本'];
+        神盾局_在线.textContent = 神盾局项目['在线'];
+
+    })
+    .catch(error => {
+    });
+}
+
+        document.addEventListener('DOMContentLoaded', 设置项目信息);//初始化弹幕儿
+
+
+</script>
+
+<script src="配置V1/控制器.js"></script>
+<script src="配置V1/弹幕.js"></script>
+
+<script src="配置V1/播放音乐.js"></script>
+<script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a3a7d41ce9fa76dc',t:'MTc4OTMwOTYwMw=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
